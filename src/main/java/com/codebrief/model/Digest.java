@@ -19,6 +19,5 @@ public class Digest {
     private List<NewsItem> topUpdates;
     private List<NewsItem> quickMentions;
     private List<NewsItem> communityBuzz;
-    private String insight;
     private String summary;
 }

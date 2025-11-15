@@ -58,7 +58,6 @@ class GeminiServiceTest {
         assertTrue(result.getTopUpdates().isEmpty());
         assertTrue(result.getQuickMentions().isEmpty());
         assertTrue(result.getCommunityBuzz().isEmpty());
-        assertEquals("No news items collected today.", result.getInsight());
     }
 
     @Test
@@ -67,7 +66,7 @@ class GeminiServiceTest {
         List<NewsItem> newsItems = createTestNewsItems();
 
         // This is what callGeminiAPI returns (the extracted text from the API response)
-        String extractedJsonText = "{\"topUpdates\": [1, 2], \"quickMentions\": [3], \"communityBuzz\": [4], \"insight\": \"Test insight\"}";
+        String extractedJsonText = "{\"topUpdates\": [1, 2], \"quickMentions\": [3], \"communityBuzz\": [4]}";
 
         when(retryTemplate.execute(any())).thenAnswer(invocation -> {
             return extractedJsonText;
@@ -82,7 +81,6 @@ class GeminiServiceTest {
         assertEquals(2, result.getTopUpdates().size());
         assertEquals(1, result.getQuickMentions().size());
         assertEquals(1, result.getCommunityBuzz().size());
-        assertEquals("Test insight", result.getInsight());
     }
 
     @Test
@@ -101,7 +99,6 @@ class GeminiServiceTest {
         assertNotNull(result.getTopUpdates());
         assertNotNull(result.getQuickMentions());
         assertNotNull(result.getCommunityBuzz());
-        assertEquals("Frontend development continues to evolve rapidly.", result.getInsight());
     }
 
     @Test
@@ -120,7 +117,6 @@ class GeminiServiceTest {
         // Assert - Should use fallback logic
         assertNotNull(result);
         assertNotNull(result.getDate());
-        assertEquals("Frontend development continues to evolve rapidly.", result.getInsight());
     }
 
     @Test

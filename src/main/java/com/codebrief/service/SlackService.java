@@ -79,12 +79,6 @@ public class SlackService {
             sb.append("\n");
         }
 
-        // Insight
-        if (digest.getInsight() != null && !digest.getInsight().isEmpty()) {
-            sb.append("💡 *Insight*\n");
-            sb.append("_").append(digest.getInsight()).append("_\n\n");
-        }
-
         sb.append("────────────────────────────────\n");
         sb.append("_Curated by Gemini AI • Running on GitHub Actions_");
 

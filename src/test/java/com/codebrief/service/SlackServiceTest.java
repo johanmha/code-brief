@@ -94,7 +94,6 @@ class SlackServiceTest {
                 .topUpdates(List.of())
                 .quickMentions(List.of())
                 .communityBuzz(List.of())
-                .insight("")
                 .build();
 
         when(retryTemplate.execute(any())).thenAnswer(invocation -> {
@@ -140,7 +139,6 @@ class SlackServiceTest {
                 .topUpdates(Arrays.asList(githubItem))
                 .quickMentions(List.of())
                 .communityBuzz(Arrays.asList(redditItem))
-                .insight("Server-side rendering is trending")
                 .build();
 
         ArgumentCaptor<String> messageCaptor = ArgumentCaptor.forClass(String.class);
@@ -171,7 +169,6 @@ class SlackServiceTest {
                 .topUpdates(Arrays.asList(itemWithoutScore))
                 .quickMentions(List.of())
                 .communityBuzz(List.of())
-                .insight("Test insight")
                 .build();
 
         when(retryTemplate.execute(any())).thenAnswer(invocation -> {
@@ -200,7 +197,6 @@ class SlackServiceTest {
                         createNewsItem("Discussion 1", "Reddit", 450),
                         createNewsItem("Discussion 2", "HackerNews", 350)
                 ))
-                .insight("Multiple items test")
                 .build();
 
         when(retryTemplate.execute(any())).thenAnswer(invocation -> {
@@ -245,7 +241,6 @@ class SlackServiceTest {
                 .communityBuzz(Arrays.asList(
                         createNewsItem("Discussion", "Reddit", 450)
                 ))
-                .insight("Test insight about trends")
                 .build();
     }
 

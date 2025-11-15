@@ -90,15 +90,13 @@ public class GeminiService {
         prompt.append("\nTASK:\n");
         prompt.append("1. Identify the TOP 3 most important updates (framework releases, major news)\n");
         prompt.append("2. List 3-5 quick mentions (interesting but less critical)\n");
-        prompt.append("3. Highlight 2-3 community discussions (Reddit/HN posts with high engagement)\n");
-        prompt.append("4. Provide a 1-sentence insight about trends you notice\n\n");
+        prompt.append("3. Highlight 2-3 community discussions (Reddit/HN posts with high engagement)\n\n");
 
         prompt.append("OUTPUT FORMAT (respond with ONLY this JSON, no markdown formatting):\n");
         prompt.append("{\n");
         prompt.append("  \"topUpdates\": [1, 3, 7],  // indices of top 3 items\n");
         prompt.append("  \"quickMentions\": [2, 5, 9, 12],  // indices of 3-5 items\n");
-        prompt.append("  \"communityBuzz\": [4, 8],  // indices of 2-3 discussion items\n");
-        prompt.append("  \"insight\": \"One sentence about what's trending\"\n");
+        prompt.append("  \"communityBuzz\": [4, 8]  // indices of 2-3 discussion items\n");
         prompt.append("}\n");
 
         return prompt.toString();
@@ -172,14 +170,12 @@ public class GeminiService {
             List<NewsItem> topUpdates = extractItems(json, "topUpdates", items);
             List<NewsItem> quickMentions = extractItems(json, "quickMentions", items);
             List<NewsItem> communityBuzz = extractItems(json, "communityBuzz", items);
-            String insight = json.has("insight") ? json.get("insight").getAsString() : "";
 
             return Digest.builder()
                     .date(LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy")))
                     .topUpdates(topUpdates)
                     .quickMentions(quickMentions)
                     .communityBuzz(communityBuzz)
-                    .insight(insight)
                     .build();
 
         } catch (Exception e) {
@@ -212,7 +208,6 @@ public class GeminiService {
                 .topUpdates(new ArrayList<>())
                 .quickMentions(new ArrayList<>())
                 .communityBuzz(new ArrayList<>())
-                .insight("No news items collected today.")
                 .build();
     }
 
@@ -236,7 +231,6 @@ public class GeminiService {
                 .topUpdates(topUpdates)
                 .quickMentions(quickMentions)
                 .communityBuzz(communityBuzz)
-                .insight("Frontend development continues to evolve rapidly.")
                 .build();
     }
 }
